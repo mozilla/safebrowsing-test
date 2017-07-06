@@ -1,0 +1,23 @@
+<!DOCTYPE html5>
+<html>
+<head>
+<title>Example page for Bug 1376036</title>
+</head>
+<body>
+<p>Test page for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1376036">Bug 1376036</a></p>
+<p><a id="bloblink" href="" download="content.exe">Download from a blob: URL</a></p>
+<p><a id="datalink" href="" download="content.exe">Download from a data: URL</a></p>
+
+<script>
+    // base64 encoding of https://testsafebrowsing.appspot.com/s/content.exe
+    const badContent = 'a2poYWxrc2hkbGtoYXNka2xoYXNsa2RoYWxraGtoYWxza2hka2xzamFoZGxramhhc2xka2hhc2xrZGgKYXNrZGpoa2FzZGpoYWtzaGRrYXNoZGtoYXNrZGhhc2tkaGthc2hka2Foc2RraGFrc2hka2FzaGRraGFzCmFza2pkaGFrc2hkbSxjbmtzamFoZGtoYXNrZGhhc2tka2hrYXNkCjg3MzQ2ODEyNzQ2OGtqc2hka2FoZHNrZGhraApha3NqZGthc2Roa3NkaGthc2hka2FzaGtkaAohISomXkAqJl4qYWhpZGFzeWRpeWlhc1xcb1wKa2Fqc2Roa2FzaGRrYXNoZGsKYWtzamRoc2tkaAplbmQK';
+
+    const datalink = document.getElementById('datalink');
+    datalink.href = "data:;base64," + badContent;
+
+    const blob = new Blob([atob(badContent)]);
+    const bloblink = document.getElementById('bloblink');
+    bloblink.href = URL.createObjectURL(blob);
+</script>
+</body>
+</html>
